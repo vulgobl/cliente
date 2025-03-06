@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de VIP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('city.png');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #00FFFF;
+            text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            font-size: 16px;
+            color: #ccc;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            margin-top: 5px;
+        }
+        .summary {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .summary div {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #ccc;
+        }
+        .summary .label {
+            font-weight: bold;
+            color: #00FFFF;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #00FFFF;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-shadow: 0 0 10px #000;
+            box-shadow: 0 0 15px #00FFFF;
+        }
+        button:hover {
+            background-color: #00cccc;
+            box-shadow: 0 0 20px #00cccc;
+        }
+        .hidden {
+            display: none;
+        }
+        #confirmacao p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="compra" class="container">
+        <h1>Compra de VIP</h1>
+        <div class="input-group">
+            <label for="vip-produto">Selecione um produto:</label>
+            <select id="vip-produto">
+                <option value="10">VIP Ouro - R$ 10,00</option>
+                <option value="15">VIP Sócio - R$ 15,00</option>
+                <option value="30">VIP Patrocinador - R$ 30,00</option>
+                <option value="38">Casa Mapeada - R$ 38,00</option>
+                <option value="48">Organização - R$ 48,00</option>
+                <option value="30">Corporação - R$ 30,00</option>
+                <option value="70">Empresa - R$ 70,00</option>
+            </select>
+        </div>
+        <div class="summary">
+            <div>
+                <span class="label">Total:</span>
+                <span id="total">R$ 10,00</span>
+            </div>
+        </div>
+        <button onclick="mostrarConfirmacao()">COMPRAR</button>
+    </div>
+    <div id="confirmacao" class="container hidden">
+        <h1>Confirmação de Compra</h1>
+        <p><strong>Produto:</strong> <span id="produto-selecionado"></span></p>
+        <p><strong>Valor:</strong> R$ <span id="valor-selecionado"></span></p>
+        <p style="color: #ffcc00;"><strong>Tire um print dessa tela e envie no WhatsApp para prosseguir com a compra!</strong></p>
+        <button onclick="irZap()">Entrar em Contato</button>
+        <button onclick="voltarCompra()">Voltar</button>
+    </div>
+    <script>
+        function mostrarConfirmacao() {
+            const produto = document.getElementById('vip-produto');
+            const valor = produto.value;
+            const nomeProduto = produto.options[produto.selectedIndex].text;
+            document.getElementById('produto-selecionado').textContent = nomeProduto;
+            document.getElementById('valor-selecionado').textContent = valor.replace('.', ',');
+            document.getElementById('compra').classList.add('hidden');
+            document.getElementById('confirmacao').classList.remove('hidden');
+        }
+        function voltarCompra() {
+            document.getElementById('confirmacao').classList.add('hidden');
+            document.getElementById('compra').classList.remove('hidden');
+        }
+        function irZap() {
+            window.open('https://wa.me/37998258102?text=', '_blank');
+        }
+    </script>
+</body>
+</html>
